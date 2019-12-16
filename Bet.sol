@@ -7,7 +7,7 @@ contract Gambling {
     
 	STATUS betStatus;	
 	COIN guess;
-	uint betAmount;
+	uint public betAmount;
     address payable public jane;
     address payable public peter;
     
@@ -15,6 +15,8 @@ contract Gambling {
     	betStatus = STATUS.AWAIT_BET;
     	jane = _jane;
     	peter = _peter;
+    	betAmount = 0;
+    	
 	}
 
     function createBet() public payable {
