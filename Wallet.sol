@@ -4,32 +4,36 @@ pragma solidity ^0.5.12;
 contract Wallet {
     
     // Wallets can only be open or close
-    enum WALLET { OPEN, CLOSE }
+    enum WalletState { OPENED, CLOSED }
     
     // state of this wallet contract
-    WALLET state public;
-
+    WalletState public mode;
+    
 	constructor() public {
-	    state = WALLET.CLOSE; // closed at first
+	    mode = WalletState.CLOSED; // closed at first
 	}
 
+    // students add comments !!
 	function openWallet() public {
-	    require(state == WALLET.CLOSE);
-	    state = WALLET.OPEN;
+	    require(mode == WalletState.CLOSED);
+	    mode = WalletState.OPENED;
 	}
 
+    // students add comments !!
 	function closeWallet() public {
-    	require(state == WALLET.OPEN);
-        state = WALLET.CLOSE;
+    	require(mode == WalletState.OPEN);
+        mode = WalletState.CLOSE;
 	}
 
+    // students add comments !! 
 	function deposit() public payable {
-        require(state == WALLET.OPEN);
+        require(mode == WalletState.OPEN);
         
 	}
 	
 	function withdraw(uint amount) public {
-    	require(state == WALLET.OPEN);
+    	require(mode == WalletState.OPEN);
+    	require(amount <= address(this).balance);
     	msg.sender.transfer(amount);
 	}
 	

@@ -9,7 +9,8 @@ contract TrialRun {
 		count = 0;
 	}
 
-	function up() public {
+	function up() public payable {
+	    require(msg.value >= 1 ether);
 		count = count + 1; // increment the counter !
 	}
 } 
